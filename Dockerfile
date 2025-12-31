@@ -1,6 +1,7 @@
 FROM caddy:latest
 
 COPY Caddyfile /etc/caddy/Caddyfile
+COPY custom.html /usr/share/caddy/custom.html
 
 RUN caddy fmt --overwrite /etc/caddy/Caddyfile
 
