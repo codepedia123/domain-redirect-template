@@ -1,3 +1,4 @@
+# global options
 {
 	admin off
 	persist_config off
@@ -8,17 +9,18 @@
 	}
 }
 
+# site block
 :{$PORT} {
 	log { format json }
 	
-	# Serve custom HTML for /redirect and /redirect/*
+	# Custom HTML for /redirect and subpaths
 	handle /redirect* {
 		root * /usr/share/caddy
 		try_files /custom.html /custom.html
 		file_server
 	}
 	
-	# Proxy all other paths to your Activepieces
+	# Proxy everything else to Activepieces
 	handle {
 		reverse_proxy https://activepieces-production-0d12.up.railway.app {
 			header_up Host {upstream_hostport}
